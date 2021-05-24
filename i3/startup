@@ -1,0 +1,17 @@
+#!/bin/sh
+
+exec_single() {
+  prog=$1
+  shift
+  (ps -A | grep $prog) || $prog $@ &
+}
+
+exec_single udiskie --tray
+exec_single connman-gtk
+exec_single flameshot
+exec_single fcitx5
+exec_single pulseaudio -D
+exec_single pasystray
+
+setxkbmap -option caps:ctrl_modifier
+

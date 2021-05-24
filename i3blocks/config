@@ -1,0 +1,67 @@
+# i3blocks configuration file
+#
+# The i3blocks man page describes the usage of the binary,
+# and its website describes the configuration:
+#
+#     https://vivien.github.io/i3blocks
+
+
+# Global properties
+separator=true
+separator_block_width=15
+
+[disk_root]
+command=~/scripts/disk '/'
+interval=5
+color=#75715e
+
+[disk_home]
+command=~/scripts/disk '/home'
+interval=5
+color=#888888
+
+[memory]
+command=echo m: $(~/scripts/neomem)
+interval=1
+color=#6fc2ef
+
+#[kernel]
+#command=echo ker: $(uname -s -r)
+#interval=once
+#color=#f4bf75
+
+[uptime]
+command=awk '{print "u: "int($1/86400)"d "int(($1%86400)/3600)"h "int(($1%3600)/60)"m"}' /proc/uptime  
+interval=60
+color=#acc267
+
+[volume]
+command=[ $(pamixer --get-mute) = "false" ] && printf "v: " || printf "MUTE: " && echo $(pamixer --get-volume)%; [ $button = 4 ] && pamixer --increase 5; [ $button = 5 ] && pamixer --decrease 5;
+interval=1
+color=#e1a3ee
+
+[battery]
+command=~/scripts/battery
+interval=10
+color=#acc267
+
+[cpu_temp]
+command=echo t: $(sensors coretemp-isa-0000 | head -n 3 | tail -n 1 | awk '{print $4 "°C"}')
+interval=3
+color=#fb9fb1
+
+[weather]
+command=curl "wttr.in/Chattanooga?m&format=1" | awk '{print "w: " $2}'
+interval=3600
+color=#12cfc0
+
+[sunset]
+command=echo s: $(~/scripts/sunset)
+interval=3600
+color=#ddb26f
+
+[time]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=1
+color=#dddddd
+
