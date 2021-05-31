@@ -1,9 +1,7 @@
 " plugins
 call plug#begin('~/.vim/plugged')
-Plug 'ika-musuko/vim-sublime-monokai'
 
 " general
-"Plug 'itchyny/lightline.vim'
 Plug 'mbbill/undotree'
 Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
