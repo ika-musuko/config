@@ -6,6 +6,11 @@ exec_single() {
   (ps -A | grep $prog) || $prog $@ &
 }
 
+# monitor config
+~/.screenlayout/topdell.sh
+feh --bg-scale "/home/sherwyn/Pictures/forest.jpg"
+
+# startup apps
 exec_single udiskie --tray
 exec_single connman-gtk
 exec_single flameshot
@@ -13,5 +18,6 @@ exec_single fcitx5
 exec_single pulseaudio -D
 exec_single pasystray
 
+# keyboard mods
 setxkbmap -option caps:ctrl_modifier
 

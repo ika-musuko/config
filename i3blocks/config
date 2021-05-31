@@ -35,6 +35,11 @@ command=awk '{print "u: "int($1/86400)"d "int(($1%86400)/3600)"h "int(($1%3600)/
 interval=60
 color=#acc267
 
+[backlight]
+command=echo b: $(bc <<< "$(cat /sys/class/backlight/intel_backlight/brightness) / 30")%
+interval=1
+color=#ddb26f
+
 [volume]
 command=[ $(pamixer --get-mute) = "false" ] && printf "v: " || printf "MUTE: " && echo $(pamixer --get-volume)%; [ $button = 4 ] && pamixer --increase 5; [ $button = 5 ] && pamixer --decrease 5;
 interval=1
@@ -51,7 +56,7 @@ interval=3
 color=#fb9fb1
 
 [weather]
-command=curl "wttr.in/Chattanooga?m&format=1" | awk '{print "w: " $2}'
+command=curl "wttr.in/Chattanooga?m&format=1" | awk '{print $1 ": " $2}'
 interval=3600
 color=#12cfc0
 

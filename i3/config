@@ -2,11 +2,10 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 #
+#
+
 # startup 
 exec_always --no-startup-id "/home/sherwyn/.config/i3/startup"
-
-# wallpaper
-exec_always --no-startup-id feh --bg-scale "/home/sherwyn/Pictures/forest.jpg"
 
 # apps on keybind
 bindsym $mod+semicolon exec firefox
@@ -20,13 +19,17 @@ for_window [class="Blueman-manager"] floating enable
 for_window [class="Qjackctl"] floating enable
 for_window [class="Connman-gtk"] floating enable
 for_window [class="Lxappearance"] floating enable
+for_window [title="Blender Preferences"] floating enable
 
 # default workspaces for windows
 assign [class="Discord"] 10
+assign [class="Lightcord"] 10
 assign [class="Kotatogram"] 10
 assign [class="Telegram"] 10
 assign [class="LINE"] 10
 assign [class="Zim"] 9
+
+focus_follows_mouse no
 
 # use super key as $mod (Mod4 for super)
 set $mod Mod4
@@ -35,10 +38,6 @@ set $mod Mod4
 default_border pixel 1
 default_floating_border normal
 hide_edge_borders smart
-
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:monospace 10
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -55,8 +54,8 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
-bindsym $mod+Shift+Return exec alacritty -d $(xcwd)
+bindsym $mod+Return exec termite
+bindsym $mod+Shift+Return exec termite -d $(xcwd)
 
 # kill focused window
 bindsym $mod+q kill
@@ -131,6 +130,18 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# workspace monitors
+workspace $ws1  output LVDS-1
+workspace $ws2  output LVDS-1
+workspace $ws3  output LVDS-1
+workspace $ws4  output LVDS-1
+workspace $ws5  output LVDS-1
+workspace $ws6  output DP-1
+workspace $ws7  output DP-1
+workspace $ws8  output DP-1
+workspace $ws9  output DP-1
+workspace $ws10 output DP-1
+
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -201,27 +212,49 @@ bindsym $mod+minus scratchpad show
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
+#
+
+set $bg "#151515"
+
+set $bgfocus "#072c40"
+set $txfocus "#6fc2ef"
+set $infocus "#ddb26f"
+
+set $bgfocin "#2f1f32"
+set $txfocin "#a17aa8"
+
+set $txdeflt "#dddddd"
+set $txunfoc "#444444"
+
+set $bgurgnt "#450310"
+set $txurgnt "#fb9fb1"
+
 bar {
     status_command i3blocks
-    font pango:monospace 9.5
+    font pango:monospace 9
     colors {
-        background #151515
+        background $bg
         statusline #ffffff
-    #                      border  backgr. text
-        focused_workspace  #151515 #252525 #6fc2ef
-        active_workspace   #151515 #151515 #e5e8f0
-        inactive_workspace #151515 #151515 #e5e8f0
-        binding_mode       #fb9fb1 #151515 #fb9fb1 
-        urgent_workspace   #fb9fb1 #151515 #fb9fb1
+    #                      border   backgr.  text
+        focused_workspace  $bg      $bgfocus $txfocus
+        active_workspace   $bg      $bgfocin $txfocin
+        inactive_workspace $bg      $bg      $txunfoc
+        binding_mode       $txurgnt $bg      $txurgnt 
+        urgent_workspace   $txurgnt $bgurgnt $txurgnt
     }
 }
 #
-# class                 border  backgr. text    indicator child_border
-client.focused          #6fc2ef #000000 #6fc2ef #ddb26f   #6fc2ef
-client.focused_inactive #4c566a #000000 #e5e8f0 #e5e8f0   #666666
-client.unfocused        #4c566a #000000 #444444 #444444   #4c566a
-client.urgent           #fb9fb1 #000000 #fb9fb1 #fb9fb1   #fb9fb1
-client.placeholder      #000000 #0c0c0c #f8f8f2 #000000   #0c0c0c
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:monospace 9
+
+#
+# class                 border  backgr.  text     indicator child_border
+client.focused          $bg     $bgfocus $txfocus $infocus  $txfocus
+client.focused_inactive $bg     $bgfocin $txfocin $txdeflt  #666666
+client.unfocused        $bg     #000000  $txunfoc $txunfoc  #4c566a
+client.urgent           $bg     $bgurgnt $txurgnt $txurgnt  $txurgnt
+client.placeholder      $bg     #0c0c0c  #f8f8f2  #000000   #0c0c0c
 
 client.background       #ffffff
 

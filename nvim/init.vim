@@ -9,17 +9,10 @@ Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'jremmen/vim-ripgrep'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ap/vim-buftabline'
 Plug 'tpope/vim-fugitive'
 Plug 'danro/rename.vim'
 Plug 'djoshea/vim-autoread'
-
-" autoformat
-Plug 'Chiel92/vim-autoformat'
-
-" flutter
-Plug 'dart-lang/dart-vim-plugin'
 
 call plug#end()
 
@@ -38,18 +31,6 @@ set background=dark
 
 " plugin-specific
 map <leader>u :UndotreeToggle<cr>
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <leader>ac  <Plug>(coc-codeaction)
-nmap <leader>qf  <Plug>(coc-fix-current)
-nmap <leader>rn  <Plug>(coc-rename)
-nmap <leader>e[  <Plug>(coc-diagnostic-prev-error)
-nmap <leader>e]  <Plug>(coc-diagnostic-next-error)
-nmap <leader>w[  <Plug>(coc-diagnostic-prev)
-nmap <leader>w]  <Plug>(coc-diagnostic-next)
-nmap <leader>ld  <Plug>(coc-list-diagnostics)
 
 " lightline
 "let g:lightline = {
@@ -60,10 +41,6 @@ nmap <leader>ld  <Plug>(coc-list-diagnostics)
 map <leader>f :Files<cr>
 map <leader>r :Lines<cr>
 map <leader>p :Buffers<cr>
-
-" autoformat on save
-autocmd BufWrite *.dart Autoformat
-autocmd BufWrite *.h,*.c,*.hpp,*.cpp silent exec "!rm tags && ctags -R *.c *.cpp *.h *.hpp"
 
 " main settings
 filetype plugin indent on
