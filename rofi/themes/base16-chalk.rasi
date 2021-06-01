@@ -57,7 +57,7 @@ window {
     background-color: @background;
     border:           0;
     padding:          2;
-    font: "monospace 9.5";
+    font: "monospace 8";
 }
 mainbox {
     border:  0;
