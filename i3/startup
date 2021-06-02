@@ -7,7 +7,7 @@ exec_single() {
 }
 
 # monitor config
-~/.screenlayout/topdell.sh
+~/localscripts/monitor-adjust
 feh --bg-scale "/home/sherwyn/Pictures/forest.jpg"
 
 # startup apps
